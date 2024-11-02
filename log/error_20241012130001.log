@@ -1,0 +1,108 @@
+[2024-10-12 13:00:02 +0000] [26845] [INFO] Starting gunicorn 20.1.0
+[2024-10-12 13:00:02 +0000] [26845] [INFO] Listening at: http://0.0.0.0:1000 (26845)
+[2024-10-12 13:00:02 +0000] [26845] [INFO] Using worker: gthread
+[2024-10-12 13:00:03 +0000] [26848] [INFO] Booting worker with pid: 26848
+[2024-10-12 13:00:03 +0000] [26849] [INFO] Booting worker with pid: 26849
+[2024-10-12 13:00:03 +0000] [26851] [INFO] Booting worker with pid: 26851
+[2024-10-12 13:38:35,869] ERROR in app: Exception on /add_peer/wg0 [POST]
+Traceback (most recent call last):
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/src/dashboard.py", line 1399, in add_peer
+    bandwidth = float(data['bandwidth']) * pow(1024, 3) if 'bandwidth' in data else 0
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: ''
+[2024-10-12 13:57:06,123] ERROR in app: Exception on /get_config/wg0 [GET]
+Traceback (most recent call last):
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/src/dashboard.py", line 1231, in get_conf
+    config_interface = read_conf_file_interface(config_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/src/dashboard.py", line 235, in read_conf_file_interface
+    with open(conf_location, 'r', encoding='utf-8') as file_object:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/etc/wireguard/wg0.conf'
+[2024-10-12 13:57:16,151] ERROR in app: Exception on /get_config/wg0 [GET]
+Traceback (most recent call last):
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/src/dashboard.py", line 1231, in get_conf
+    config_interface = read_conf_file_interface(config_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/src/dashboard.py", line 235, in read_conf_file_interface
+    with open(conf_location, 'r', encoding='utf-8') as file_object:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/etc/wireguard/wg0.conf'
+[2024-10-12 13:57:36,635] ERROR in app: Exception on /get_config/wg0 [GET]
+Traceback (most recent call last):
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/src/dashboard.py", line 1231, in get_conf
+    config_interface = read_conf_file_interface(config_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/src/dashboard.py", line 235, in read_conf_file_interface
+    with open(conf_location, 'r', encoding='utf-8') as file_object:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/etc/wireguard/wg0.conf'
+[2024-10-12 13:57:46,163] ERROR in app: Exception on /get_config/wg0 [GET]
+Traceback (most recent call last):
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/chat_match_telegram_bot/.venv/lib/python3.12/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/src/dashboard.py", line 1231, in get_conf
+    config_interface = read_conf_file_interface(config_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/src/dashboard.py", line 235, in read_conf_file_interface
+    with open(conf_location, 'r', encoding='utf-8') as file_object:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/etc/wireguard/wg0.conf'

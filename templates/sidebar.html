@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد وایرگارد</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+
+        .sidebar {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(45deg, #34D399, #10B981);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .menu-item:hover {
+            transform: translateX(-4px);
+            background: rgba(52, 211, 153, 0.1);
+        }
+
+        .active-menu-item {
+            background: rgba(52, 211, 153, 0.2);
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #059669, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title {
+            position: relative;
+            padding-right: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(45deg, #34D399, #10B981);
+            border-radius: 50%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sidebar-enter {
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .logo-spin {
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .menu-item i {
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover i {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div id="sidebar" class="fixed top-0 right-0 w-72 h-screen sidebar p-6 transition-all duration-300 ease-in-out transform translate-x-0 overflow-y-auto">
+        <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <i class="fas fa-shield-alt text-3xl gradient-text logo-spin"></i>
+                <h1 class="text-2xl font-bold gradient-text">وایرگارد</h1>
+            </div>
+            <button id="toggleSidebar" class="p-2 rounded-lg hover:bg-green-100 transition-colors duration-200 focus:outline-none">
+                <i class="fas fa-bars text-green-600"></i>
+            </button>
+        </div>
+
+        <nav class="space-y-8">
+            <div class="sidebar-enter" style="animation-delay: 0.1s">
+                <a href="/" class="menu-item flex items-center px-4 py-3 text-green-700 rounded-lg active-menu-item">
+                    <i class="fas fa-home ml-3"></i>
+                    <span>داشبورد</span>
+                </a>
+            </div>
+
+            <div class="sidebar-enter" style="animation-delay: 0.2s">
+                <h2 class="section-title text-sm font-semibold text-green-600 uppercase tracking-wider mb-3">کانفیگ‌ها</h2>
+                <div class="space-y-1">
+                    {% for i in conf %}
+                        <a href="/configuration/{{i['conf']}}" class="menu-item flex items-center px-4 py-3 text-green-700 rounded-lg">
+                            <i class="fas fa-cog ml-3"></i>
+                            <span>{{i['conf']}}</span>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="sidebar-enter" style="animation-delay: 0.3s">
+                <h2 class="section-title text-sm font-semibold text-green-600 uppercase tracking-wider mb-3">ابزارها</h2>
+                <div class="space-y-1">
+                    <a href="#" class="menu-item flex items-center px-4 py-3 text-green-700 rounded-lg" data-toggle="modal" data-target="#ping_modal">
+                        <i class="fas fa-network-wired ml-3"></i>
+                        <span>پینگ</span>
+                    </a>
+                    <a href="#" class="menu-item flex items-center px-4 py-3 text-green-700 rounded-lg" data-toggle="modal" data-target="#traceroute_modal">
+                        <i class="fas fa-route ml-3"></i>
+                        <span>مسیریابی</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="sidebar-enter" style="animation-delay: 0.4s">
+                <h2 class="section-title text-sm font-semibold text-green-600 uppercase tracking-wider mb-3">ارتباط با ما</h2>
+                <div class="space-y-1">
+                    <a href="https://github.com/Iliya8989" target="_blank" class="menu-item flex items-center px-4 py-3 text-green-700 rounded-lg">
+                        <i class="fab fa-github ml-3"></i>
+                        <span>گیت‌هاب</span>
+                    </a>
+                </div>
+            </div>
+
+            {% if "username" in session %}
+            <div class="sidebar-enter" style="animation-delay: 0.5s">
+                <a href="/settings" class="menu-item flex items-center px-4 py-3 text-green-700 rounded-lg">
+                    <i class="fas fa-cogs ml-3"></i>
+                    <span>تنظیمات</span>
+                </a>
+            </div>
+            {% endif %}
+
+            {% if session['update'] == "true" %}
+            <div class="sidebar-enter" style="animation-delay: 0.6s">
+                <a href="https://github.com/donaldzou/WGDashboard#-how-to-update-the-dashboard" target="_blank" 
+                   class="menu-item flex items-center px-4 py-3 text-white bg-gradient-to-r from-green-500 to-green-600 rounded-lg hover:from-green-600 hover:to-green-700">
+                    <i class="fas fa-sync-alt ml-3 animate-spin"></i>
+                    <span>بروزرسانی موجود است!</span>
+                </a>
+            </div>
+            {% endif %}
+
+            {% if "username" in session %}
+            <div class="sidebar-enter" style="animation-delay: 0.7s">
+                <a href="/signout" class="menu-item flex items-center px-4 py-3 text-white bg-gradient-to-r from-red-500 to-red-600 rounded-lg hover:from-red-600 hover:to-red-700">
+                    <i class="fas fa-sign-out-alt ml-3"></i>
+                    <span>خروج</span>
+                </a>
+            </div>
+            {% endif %}
+        </nav>
+    </div>
+
+    <script>
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('translate-x-full');
+        });
+
+        // Add smooth scroll behavior to sidebar
+        document.querySelector('#sidebar').addEventListener('scroll', function(e) {
+            e.target.style.scrollBehavior = 'smooth';
+        });
+
+        // Add active state to current menu item
+        const currentPath = window.location.pathname;
+        document.querySelectorAll('.menu-item').forEach(item => {
+            if (item.getAttribute('href') === currentPath) {
+                item.classList.add('active-menu-item');
+            }
+        });
+    </script>
+</body>
+</html>
