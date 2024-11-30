@@ -23,11 +23,14 @@ import pytz
 from flask import Flask, request, render_template, redirect, url_for, session, jsonify, g, send_file
 from flask_qrcode import QRcode
 from icmplib import ping, traceroute
-
+import os
+import telebot
+from flask import Flask, request, render_template, redirect, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 # Import other python files
 from util import regex_match, check_DNS, check_Allowed_IPs, check_remote_endpoint, \
     check_IP_with_range, clean_IP_with_range
-
+import subprocess
 # Dashboard Version
 DASHBOARD_VERSION = 'v3.0.6'
 
@@ -173,8 +176,72 @@ def set_dashboard_conf(config):
     """
     with open(DASHBOARD_CONF, "w", encoding='utf-8') as conf_object:
         config.write(conf_object)
+import os
+import json
+import subprocess
+telegram_bot = None
+import sys
+import signal
+import subprocess
 
+@app.route('/update_telegram_bot', methods=['POST'])
+def update_telegram_bot():
+    # Get bot configuration from form
+    bot_token = request.form.get('bot_token')
+    admin_id = request.form.get('admin_id')
+    
+    try:
+        # Stop existing bot process if running
+        if os.path.exists('bot_pid.txt'):
+            with open('bot_pid.txt', 'r') as f:
+                pid = int(f.read().strip())
+            try:
+                os.kill(pid, signal.SIGTERM)
+            except:
+                pass
+        
+        # Save configuration to JSON file
+        config = {
+            'bot_token': bot_token,
+            'admin_id': admin_id
+        }
+        with open('telegram_config.json', 'w') as f:
+            json.dump(config, f)
+        
+        # Start new bot process
+        process = subprocess.Popen([
+            sys.executable, 'bot.py'
+        ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+        # Save PID to file
+        with open('bot_pid.txt', 'w') as f:
+            f.write(str(process.pid))
+        
+        flash('ربات تلگرام با موفقیت راه‌اندازی شد', 'success')
+    
+    except Exception as e:
+        flash(f'خطا در راه‌اندازی ربات: {str(e)}', 'danger')
+    
+    return redirect('/settings')
 
+@app.route('/stop_telegram_bot', methods=['POST'])
+def stop_telegram_bot():
+    try:
+        # Stop bot process
+        if os.path.exists('bot_pid.txt'):
+            with open('bot_pid.txt', 'r') as f:
+                pid = int(f.read().strip())
+            os.kill(pid, signal.SIGTERM)
+            
+            # Remove PID and config files
+            os.remove('bot_pid.txt')
+            os.remove('telegram_config.json')
+        
+        flash('ربات تلگرام متوقف شد', 'warning')
+    except Exception as e:
+        flash(f'خطا در توقف ربات: {str(e)}', 'danger')
+    
+    return redirect('/settings')
 # Get all keys from a configuration
 def get_conf_peer_key(config_name):
     """
@@ -1662,6 +1729,7 @@ def generate_qrcode(config_name):
 @app.route('/download_all/<config_name>', methods=['GET'])
 def download_all(config_name):
     """
+
     Download all configuration
     @param config_name: Configuration Name
     @return: JSON Object
