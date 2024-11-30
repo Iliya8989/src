@@ -85,12 +85,14 @@ rm -rf wg-guard
 apt-get -y install python3-pip
 apt install gunicorn -y
 cd wg-guard/src
+tmux
 sudo chmod u+x wgd.sh
 pip install -r requirements.txt
 sudo ./wgd.sh install
 sudo chmod -R 755 /etc/wireguard
-./wgd.sh start or ./wgd.sh restart
+python3 dashboard.py
 ```
+-پس از انجام این مراحل کلید  بزنید Ctrl + B
 <div align="right">
 
 - به پنل خودتون با [serverip:8080] وارد شوید. نام کاربری و رمز عبور پنل به صورت پیش فرض admin میباشد.
