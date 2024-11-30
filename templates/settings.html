@@ -107,6 +107,25 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="card mb-3">
+                    <h6 class="card-header">تنظیمات ربات تلگرام:</h6>
+                    <div class="card-body">
+                        <form action="/update_telegram_bot" method="post">
+                            <div class="form-group">
+                                <label for="bot_token" class="ms-1 mb-1">توکن ربات:</label>
+                                <input type="text" class="form-control mb-2" id="bot_token" name="bot_token"
+                                       value="{{ bot_token }}" dir="ltr" required>
+                                
+                                <label for="admin_id" class="ms-1 mb-1">شناسه عددی ادمین:</label>
+                                <input type="text" class="form-control mb-4" id="admin_id" name="admin_id"
+                                       value="{{ admin_id }}" dir="ltr" required>
+                                
+                                <button type="submit" class="btn btn-success">بروزرسانی تنظیمات ربات تلگرام</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             {% endif %}
             <div class="card">
                 <h6 class="card-header">تنظیمات پنل :</h6>
@@ -142,37 +161,6 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">تایید تنظیمات پنل</h5>
                 </div>
-                % if required_auth == "true" %}
-                <!-- Existing card sections... -->
-
-                <!-- New Telegram Bot Settings Card -->
-                <div class="card mb-3">
-                    <h6 class="card-header">تنظیمات ربات تلگرام:</h6>
-                    <div class="card-body">
-                        <form action="/update_telegram_bot" method="post">
-                            <div class="form-group">
-                                <label for="bot_token" class="ms-1 mb-1">توکن ربات:</label>
-                                <input type="text" class="form-control mb-2" id="bot_token" name="bot_token"
-                                       value="{{ bot_token }}" dir="ltr" required>
-                                
-                                <label for="admin_id" class="ms-1 mb-1">شناسه عددی ادمین:</label>
-                                <input type="text" class="form-control mb-2" id="admin_id" name="admin_id"
-                                       value="{{ admin_id }}" dir="ltr" required>
-                                
-                                <label for="channel_username" class="ms-1 mb-1">نام کاربری کانال (بدون @):</label>
-                                <input type="text" class="form-control mb-2" id="channel_username" name="channel_username"
-                                       value="{{ channel_username }}" dir="ltr">
-                                
-                                <label for="bot_username" class="ms-1 mb-1">نام کاربری ربات (بدون @):</label>
-                                <input type="text" class="form-control mb-4" id="bot_username" name="bot_username"
-                                       value="{{ bot_username }}" dir="ltr" required>
-                                
-                                <button type="submit" class="btn btn-success">بروزرسانی تنظیمات ربات تلگرام</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            {% endif %}
                 <div class="modal-body">
                     <small>آی پی فعلی پنل :</small>
                     <p>{{ app_ip }}</p>
