@@ -97,12 +97,5 @@ python3 dashboard.py
 
 - به پنل خودتون با [serverip:8080] وارد شوید. نام کاربری و رمز عبور پنل به صورت پیش فرض admin میباشد.
 - دقت کنید که داخل تنظیمات Remote endpoint را به ایپی سرور ایران در صورت تانل تغییر بدهید.
-- اگر به مشکل internal error در زمان لود پنل خوردید، سرور را یک بار ریبوت کنید و سپس دستور زیر را دوباره بزنید
-<div align="left">
- 
-```
-$ cd WireguardPersian/src
-$ ./wgd.sh restart
-```
   </details>
 </div>
