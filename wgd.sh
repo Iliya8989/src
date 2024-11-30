@@ -1,4 +1,4 @@
-
+#!/bin/bash
 app_name="dashboard.py"
 app_official_name="WGDashboard"
 PID_FILE=./gunicorn.pid
